@@ -1,0 +1,25 @@
+# syntax = docker/dockerfile:1.2
+FROM node:16-alpine As builder
+
+WORKDIR /app
+COPY package.json .
+COPY app.json .
+RUN npm install 
+# RUN chown -R node /usr/app/node_modules
+COPY . .
+EXPOSE 5000
+CMD [ "node", "index.js" ]
+# FROM builder As Prod
+# FROM builder As Prod
+# WORKDIR /root/
+# COPY --from=builder /app .
+# EXPOSE 5000
+# CMD [ "node", "index.js" ]
+
+# FROM builder As newProd
+# WORKDIR /root/
+# COPY --from=builder /app .
+# EXPOSE 5000
+# CMD [ "node", "index.js" ]
+
+
